@@ -7,26 +7,29 @@
 </head>
 <body>
     <div id="timer"></div>
-    <button id="inicio">Inicio</button>
+    <button id="inicio" onclick="tick()">Inicio</button>
+    <button id="pausa" onclick="pausarTimer()">Pausa</button>
 </body>
 <script>
-    let segundos = 1500; 
+    let segundos = 3; 
     let modo = "trabajo"; 
-    let ciclos = 0; 
+    let ciclos = 4; 
+    let interval = 0
 
     const timer = document.getElementById("timer");
-    const botonInicio = document.getElementById("inicio");
+
     function tick() {
-        setInterval(actualizarTimer, 1000)
+       interval = setInterval(actualizarTimer, 1000)
     }
 
     function actualizarTimer() {
         segundos -= 1
-        timer.innerHTML = formatear_segundos(segundos); 
-        console.log(segundos)
+
+        timer.innerHTML = formatearSegundos(segundos); 
+
     }
 
-    function formatear_segundos(segundos) {
+    function formatearSegundos(segundos) {
         let minutos = Math.floor(segundos / 60);
         let extraSeconds = segundos % 60; 
         minutos = minutos < 10 ? "0" + minutos : minutos; 
@@ -35,7 +38,12 @@
         return timer;
     }
 
-    botonInicio.addEventListener("click", tick())
+    function pausarTimer() {
+        clearInterval(interval);
+    }
+
+
+
 
 </script>
 </html>
