@@ -11,20 +11,35 @@
     <button id="pausa" onclick="pausarTimer()">Pausa</button>
 </body>
 <script>
-    let segundos = 3; 
+    let segundos = 1500; 
     let modo = "trabajo"; 
-    let ciclos = 4; 
+    let ciclos = 0; 
     let interval = 0
 
     const timer = document.getElementById("timer");
 
     function tick() {
+
        interval = setInterval(actualizarTimer, 1000)
     }
 
     function actualizarTimer() {
         segundos -= 1
-
+        if (segundos == 0) {
+        if (modo == "trabajo") {
+            ciclos += 1;
+        }    
+        if (modo == "trabajo" && ciclos % 4 == 0) {
+            modo = "breakLargo"; 
+            segundos = 900; 
+        } else if (modo == "trabajo" && ciclos % 4 != 0) {
+            modo = "break"; 
+            segundos = 300;
+        } else if (modo != "trabajo") {
+            modo = "trabajo"; 
+            segundos = 1500;
+        }
+       } 
         timer.innerHTML = formatearSegundos(segundos); 
 
     }
