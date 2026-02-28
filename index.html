@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pomodoro Tracker | Borcho App</title>
+</head>
+<body>
+    <div id="timer"></div>
+    <button id="inicio">Inicio</button>
+</body>
+<script>
+    let segundos = 1500; 
+    let modo = "trabajo"; 
+    let ciclos = 0; 
+
+    const timer = document.getElementById("timer");
+    const botonInicio = document.getElementById("inicio");
+    function tick() {
+        setInterval(actualizarTimer, 1000)
+    }
+
+    function actualizarTimer() {
+        segundos -= 1
+        timer.innerHTML = formatear_segundos(segundos); 
+        console.log(segundos)
+    }
+
+    function formatear_segundos(segundos) {
+        let minutos = Math.floor(segundos / 60);
+        let extraSeconds = segundos % 60; 
+        minutos = minutos < 10 ? "0" + minutos : minutos; 
+        extraSeconds = extraSeconds < 10 ? "0" + extraSeconds : extraSeconds; 
+        let timer = minutos + ":" + extraSeconds;
+        return timer;
+    }
+
+    botonInicio.addEventListener("click", tick())
+
+</script>
+</html>
