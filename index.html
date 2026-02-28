@@ -4,20 +4,88 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pomodoro Tracker | Borcho App</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
 </head>
+<style>
+    body 
+    {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: auto;
+        height: 100vh;
+        background-color: #11101f;
+        color: #f0f0f0;
+        gap: 15px; 
+    }
+
+    #timer 
+    {
+        font-size: 7rem;
+        color: #ff8c00;
+        font-family: 'Share Tech Mono', monospace;
+    }
+
+    #modo, #ciclos 
+    {
+        font-size: 1.1rem;
+        color: #ff8c00;
+        opacity: 0.7;
+    }
+
+    button 
+    {
+        background-color: transparent;
+        border-color: #ff8c00;
+        color: #ff8c00;
+        border-radius: 8px;
+        font-size: 1.1rem;
+        padding: 10px 15px; 
+    }
+
+    button:hover 
+    {
+        cursor: pointer;
+        background-color: #ff8c00;
+        color: #11101f;
+    }
+
+    #controles 
+    {
+        display: flex;
+        gap: 10px;
+    }
+
+    #ciclo-container 
+    {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        justify-content: center;
+    }
+
+</style>
 <body>
     <div id="timer">25:00</div>
     <div id="modo">Trabajo</div>
-    <div id="ciclos">0</div>
-    <button id="inicio" onclick="tick()">Inicio</button>
-    <button id="pausa" onclick="pausarTimer()">Pausa</button>
+    <div id="ciclo-container">
+        <div id="tomato">🍅:</div>
+        <div id="ciclos">0</div>
+    </div>
+    <div id="controles">
+        <button id="inicio" onclick="tick()">Inicio</button>
+        <button id="pausa" onclick="pausarTimer()">Pausa</button>
+    </div>
 </body>
 <script>
     let segundos = 1500; 
     let modo = "trabajo"; 
     let ciclos = 0; 
     let interval = 0
-    
+
     const timer = document.getElementById("timer");
     const modoDiv = document.getElementById("modo");
     const ciclosDiv = document.getElementById("ciclos");
