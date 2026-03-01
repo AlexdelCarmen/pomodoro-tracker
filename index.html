@@ -30,7 +30,7 @@
         transition: color 0.8s ease;
     }
 
-    #modo, #ciclos 
+    #modo, #ciclos, #pausas
     {
         font-size: 1.1rem;
         color: #ff8c00;
@@ -99,6 +99,7 @@
         <div id="tomato">🍅:</div>
         <div id="ciclos">0</div>
     </div>
+    <div id="pausas">Pausas: 0</div>
     <div id="controles">
         <button id="inicio" onclick="tick()">Inicio</button>
         <button id="pausa" onclick="pausarTimer()">Pausa</button>
@@ -108,7 +109,9 @@
     let segundos = 1500; 
     let modo = "trabajo"; 
     let ciclos = 0; 
-    let interval = 0
+    let interval = 0;
+    let = pausas = 0;
+    let minutosExcedidos = 0; 
 
     const timer = document.getElementById("timer");
     const modoDiv = document.getElementById("modo");
@@ -128,27 +131,28 @@
     function actualizarTimer() {
         segundos -= 1
         if (segundos == 0) {
-        if (modo == "trabajo") {
-            ciclos += 1;
-            ciclosDiv.innerHTML = ciclos;
-        }    
-        if (modo == "trabajo" && ciclos % 4 == 0) {
-            modo = "breakLargo"; 
-            segundos = 900; 
-            modoDiv.innerHTML = "Break Largo";
-            cambiarColor("#7174C0")
-        } else if (modo == "trabajo" && ciclos % 4 != 0) {
-            modo = "break"; 
-            segundos = 300;
-            modoDiv.innerHTML = "Break";
-            cambiarColor("#90E38F")
-        } else if (modo != "trabajo") {
-            modo = "trabajo"; 
-            segundos = 1500;
-            modoDiv.innerHTML = "Trabajo";
-            cambiarColor("#ff8c00")
-        }
-       } 
+            clearInterval(interval);
+            if (modo == "trabajo") {
+                ciclos += 1;
+                ciclosDiv.innerHTML = ciclos;
+            }    
+            if (modo == "trabajo" && ciclos % 4 == 0) {
+                modo = "breakLargo"; 
+                segundos = 900; 
+                modoDiv.innerHTML = "Break Largo";
+                cambiarColor("#7174C0")
+            } else if (modo == "trabajo" && ciclos % 4 != 0) {
+                modo = "break"; 
+                segundos = 300;
+                modoDiv.innerHTML = "Break";
+                cambiarColor("#90E38F")
+            } else if (modo != "trabajo") {
+                modo = "trabajo"; 
+                segundos = 1500;
+                modoDiv.innerHTML = "Trabajo";
+                cambiarColor("#ff8c00")
+            }
+        } 
         timer.innerHTML = formatearSegundos(segundos); 
 
     }
@@ -164,6 +168,8 @@
 
     function pausarTimer() {
         clearInterval(interval);
+        pausas += 1
+        document.getElementById("pausas").innerHTML = "Pausas: " + pausas;
     }
 
 
